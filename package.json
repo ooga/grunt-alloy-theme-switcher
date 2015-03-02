@@ -1,0 +1,42 @@
+{
+  "name": "grunt-alloy-theme-switcher",
+  "description": "A grunt plugin to ease theme switching in titanium's alloy.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/CanalTP/grunt-alloy-theme-switcher",
+  "author": {
+    "name": "Vincent Degroote",
+    "email": "vincent.degroote@canaltp.fr",
+    "url": "http://canaltp.fr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CanalTP/grunt-alloy-theme-switcher"
+  },
+  "bugs": {
+    "url": "https://github.com/CanalTP/grunt-alloy-theme-switcher/issues"
+  },
+  "licenses": [
+    {
+      "type": "AGPL",
+      "url": "https://github.com/CanalTP/grunt-alloy-theme-switcher/blob/master/LICENSE-AGPL"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
