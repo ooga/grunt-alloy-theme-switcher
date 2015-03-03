@@ -5,8 +5,17 @@
 ## why?
 
 This grunt plugin was made to fix 2 problems when using alloy's themes system:
-- tiapp.xml files could not be themed and we had to manually edit tiapps when building themes (including android amnifest and google maps api key which is lost in the manifest)
+- tiapp.xml files could not be themed and we had to manually edit tiapps when building themes (including android manifest and google maps api key which is lost inside the manifest)
 - i18n/*/strings.xml could not be redefined by themes
+
+## what this plugin does
+
+- update app/config.json to select chosen theme
+- update tiapp.xml based on theme.json configuration
+- merge theme's strings.xml into app
+
+## Warning
+When running this plugin, tiapp.xml and i18n files will be overwritten so *be sure to keep a backup* of those files before running it.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
