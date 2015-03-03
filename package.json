@@ -8,6 +8,15 @@
     "email": "vincent.degroote@canaltp.fr",
     "url": "http://canaltp.fr"
   },
+  "keywords": [
+    "appcelerator",
+    "titanium",
+    "mobile",
+    "ios",
+    "iphone",
+    "android",
+    "alloy"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/CanalTP/grunt-alloy-theme-switcher"
