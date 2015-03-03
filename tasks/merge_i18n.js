@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     var fs = require('fs'),
     path = require('path'),
     _ = require('underscore'),
-    i18n = require('ti-i18n'),
+    i18n = require('ti-i18n'),  
     chalk = require("chalk");
 
     grunt.registerTask('merge_i18n', 'If i18n files are found, merge into app i18n xmls', function(theme) {
