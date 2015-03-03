@@ -1,11 +1,15 @@
 # grunt-alloy-theme-switcher
 
-> A grunt plugin to ease theme switching in titanium's alloy.
+> A grunt plugin to make easier theme switching in a titanium's alloy project. 
+
+## why?
+
+This grunt plugin was made to fix 2 problems when using alloy's themes system:
+- tiapp.xml files could not be themed and we had to manually edit tiapps when building themes (including android amnifest and google maps api key which is lost in the manifest)
+- i18n/*/strings.xml could not be redefined by themes
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
 npm install grunt-alloy-theme-switcher --save-dev
@@ -17,73 +21,64 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-alloy-theme-switcher');
 ```
 
+## The "theme.json" configuration file
+
+You have to put a theme.json inside the root folder of your theme. 
+
+### Example
+Here is an complete example of what you can put inside this file:
+```js
+{
+    "settings": {
+        "name": "mySuperApp",
+        "version": "0.0.1",
+        "id": "com.mycompany.myapp"
+    },
+    "android":{
+        "versionCode":"14",
+        "MAPS_V2_API_KEY": "myincomprehensiblegmapstoken"
+    }
+}
+```
+
+### Details
+#### settings
+You can currently put any top level tiapp.xml node in the settings object, so *publisher*, *copyright*, *icon* etc
+#### android (optional)
+This part is used to generate the android's manifest. You *MUST* have a manifest inside you app's for this feature to work. If no manifest is found, it will raise an error. Both versionCode and MAPS_V2_API_KEY are optionnals
+
 ## The "alloy_theme_switcher" task
 
 ### Overview
-In your project's Gruntfile, add a section named `alloy_theme_switcher` to the data object passed into `grunt.initConfig()`.
-
-```js
-grunt.initConfig({
-  alloy_theme_switcher: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-});
-```
+This is the main task. It will parse your themes directory and ask you to what theme you'd like to switch.
 
 ### Options
 
-#### options.separator
+#### options.themes_folder
 Type: `String`
-Default value: `',  '`
+Default value: `./app/themes/`
 
-A string value that is used to do something with whatever.
+Location of the alloy's themes folder (with a trailing slash).
 
-#### options.punctuation
+### Arguments
+
+#### theme
 Type: `String`
-Default value: `'.'`
+Default value: none
 
-A string value that is used to do something else with whatever else.
+You can provide a theme to build as follows:
+```js
+grunt.task.run('alloy_theme_switcher:' + theme);
+```
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
 
-```js
-grunt.initConfig({
-  alloy_theme_switcher: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
+##  Thanks
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  alloy_theme_switcher: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+* [Tony Luka Savage](http://github.com/tonylukasavage) for creating the Tiapp.xml module
+* [Fokke Zandbergen](http://github.com/fokkeZB) for the ti-i18n
 
 ## Release History
 _(Nothing yet)_
