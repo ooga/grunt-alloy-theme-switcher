@@ -35,7 +35,7 @@ grunt.loadNpmTasks('grunt-alloy-theme-switcher');
 You have to put a theme.json inside the root folder of your theme. 
 
 ### Example
-Here is an complete example of what you can put inside this file:
+Here is a complete example of what you can put inside this file:
 ```js
 {
     "settings": {
@@ -54,7 +54,7 @@ Here is an complete example of what you can put inside this file:
 #### settings
 You can currently put any top level tiapp.xml node in the settings object, so *publisher*, *copyright*, *icon* etc
 #### android (optional)
-This part is used to generate the android's manifest. You *MUST* have a manifest inside you app's for this feature to work. If no manifest is found, it will raise an error. Both versionCode and MAPS_V2_API_KEY are optionnals
+This part is used to generate the android's manifest. You *MUST* have a manifest inside you app's for this feature to work. If no manifest is found, it will raise an error. Both versionCode and MAPS_V2_API_KEY are optionnals.
 
 ## The "alloy_theme_switcher" task
 
