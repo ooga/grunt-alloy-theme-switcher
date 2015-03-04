@@ -88,7 +88,7 @@ grunt.task.run('alloy_theme_switcher:' + theme);
 
 * [Tony Luka Savage](http://github.com/tonylukasavage) for the tiapp.xml
 * [Fokke Zandbergen](http://github.com/fokkeZB) for the ti-i18n
-* [Jason Kneen] https://github.com/jasonkneen for tich and tith which inspired the tiapp.xml settings part and the theme select task
+* [Jason Kneen](https://github.com/jasonkneen) for tich and tith which inspired the tiapp.xml settings part and the theme select task
 
 ## Release History
 _(Nothing yet)_
