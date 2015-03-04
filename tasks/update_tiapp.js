@@ -59,23 +59,20 @@ module.exports = function(grunt) {
                 return true;
             }
         } else {
-            grunt.log.error(chalk.red("No android configuration found for " + config.name + " or some parameters are missing (MAPS_V2_API_KEY, versionCode)"));
-            return false;
+            console.log(chalk.orange("No android configuration found for " + config.name + "!"));
+            return true;
         }
     };
 
-    grunt.registerTask('update_tiapp', 'Update the tiapp xml according to theme config', function() {
-        console.log("config.theme: " + grunt.config.get('config.theme'));
+    grunt.registerTask('update_tiapp', 'Update the tiapp xml according to theme configuration', function() {
         // read theme's config
-        var themeConfig = utils.parseJSON(grunt.option('themes_folder') + grunt.config.get('config.theme') + '/theme.json');
+        var themeConfig = utils.getThemeConfig(grunt);
         if (themeConfig) {
             // load tiapp
             var tiapp = require('tiapp.xml').load('./tiapp.xml');
             for (var setting in themeConfig.settings) {
-                if (setting !== "properties") {
-                    tiapp[setting] = themeConfig.settings[setting];
-                    console.log('Changing ' + chalk.cyan(setting) + ' to ' + chalk.yellow(themeConfig.settings[setting]));
-                }
+                tiapp[setting] = themeConfig.settings[setting];
+                console.log('Changing ' + chalk.cyan(setting) + ' to ' + chalk.yellow(themeConfig.settings[setting]));
             }
             if (_updateManifest(tiapp, themeConfig)) {
                 tiapp.write();
