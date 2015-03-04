@@ -11,6 +11,7 @@
 module.exports = function(grunt) {
     var fs = require("fs"),
     chalk = require("chalk"),
+    utils = require("../lib/utils.js"),
     _ = require("underscore");
 
     var _findAndroidNodeByAttribute = function(node){
@@ -63,13 +64,11 @@ module.exports = function(grunt) {
         }
     };
 
-    grunt.registerTask('update_tiapp', 'Update the tiapp xml according to theme config', function(theme_name) {
+    grunt.registerTask('update_tiapp', 'Update the tiapp xml according to theme config', function() {
+        console.log("config.theme: " + grunt.config.get('config.theme'));
         // read theme's config
-        var themeJsonPath = grunt.option('themes_folder') + theme_name + '/theme.json';
-        if (fs.statSync(themeJsonPath).isFile() !== true) {
-            grunt.log.error(chalk.red("No configuration file found at " + themeJsonPath));
-        } else {
-            var themeConfig = JSON.parse(fs.readFileSync(themeJsonPath, "utf-8"));
+        var themeConfig = utils.parseJSON(grunt.option('themes_folder') + grunt.config.get('config.theme') + '/theme.json');
+        if (themeConfig) {
             // load tiapp
             var tiapp = require('tiapp.xml').load('./tiapp.xml');
             for (var setting in themeConfig.settings) {

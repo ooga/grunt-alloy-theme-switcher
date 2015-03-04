@@ -11,14 +11,11 @@
 module.exports = function(grunt) {
     var fs = require("fs");
 
-
     grunt.registerTask('alloy_theme_switcher', 'A grunt plugin to ease theme switching in titanium\'s alloy.', function(theme) {
         grunt.option('themes_folder', this.options.themes_folder ? this.options.themes_folder : './app/themes/');
-
         if (theme && fs.existsSync(grunt.option('themes_folder') + theme)) {
-            grunt.task.run('select_theme:' + theme);
-            grunt.task.run('update_tiapp:' + theme);
-            grunt.task.run('merge_i18n:' + theme);
+            grunt.task.run('update_tiapp');
+            grunt.task.run('merge_i18n');
         } else {
             if (fs.existsSync(grunt.option('themes_folder')) === false || fs.statSync(grunt.option('themes_folder')).isDirectory() === false) {
                 grunt.fail.fatal("No themes folder found in " + grunt.option('themes_folder'));
