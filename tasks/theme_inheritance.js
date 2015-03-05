@@ -11,10 +11,15 @@
 module.exports = function(grunt) {
 
     var fs = require("fs"),
+    extend = require("extend"),
     chalk = require("chalk"),
     utils = require("../lib/utils.js"),
     existingThemes = [],
-    themesTree = [];
+    themesTree = [],
+    foldersToCopy = [{folder:'/styles', ext:'tss'}, {folder:'/views', ext:'xml'}, {folder:'/i18n', ext:'xml'}],
+    mergedThemeName = 'mergedTheme',
+    mergedThemeConfig = {},
+    mergedThemePath;
 
     var _constructThemesTree = function(themeConfig){
         if (themeConfig && themeConfig.baseTheme) {
@@ -27,13 +32,53 @@ module.exports = function(grunt) {
         }
     };
 
+    var _mergeThemes = function(){
+        if (themesTree.length !== 0) {
+            var themeToMerge = themesTree.pop();
+            var themePathToMerge = grunt.option('themes_folder') + themeToMerge;
+            // copy views and tss files into merged theme
+            foldersToCopy.forEach(function(element, index){
+                if (grunt.file.exists(themePathToMerge + element.folder) && grunt.file.isDir(themePathToMerge + element.folder)) {
+                    grunt.file.expand(themePathToMerge + element.folder + '/**/*.' + element.ext).forEach(function(filepath){
+                        grunt.file.copy(filepath, filepath.replace(themeToMerge, mergedThemeName));
+                    });
+                }
+            });
+            // merge theme json
+            var configToMerge = utils.getThemeConfig(grunt, themeToMerge);
+            if (configToMerge) {
+                mergedThemeConfig = extend(true, mergedThemeConfig, configToMerge);
+                if (mergedThemeConfig.baseTheme) {
+                    delete mergedThemeConfig.baseTheme;
+                }
+            }
+            _mergeThemes();
+        }
+    };
+
     grunt.registerTask('extendTheme', 'Check if a theme inherits from another and if so generate the resulting theme', function() {
         existingThemes = grunt.config.get('prompt.choose_theme.options.questions')[0].choices;
         themesTree = [];
         themesTree.push(grunt.config.get('config.theme'));
         var themeConfig = utils.getThemeConfig(grunt);
         _constructThemesTree(themeConfig);
-        console.log("themesTree:" + themesTree);
+        if (themesTree.length > 1){
+            grunt.log.ok(chalk.underline.bold("Themes inheritance tree:") + " " + chalk.cyan(themesTree.join(' -> ')));
+            // create a Temp directory for resulting merge of themes
+            mergedThemePath = grunt.option('themes_folder') + mergedThemeName;
+            if (grunt.file.exists(mergedThemePath)) {
+                grunt.file.delete(mergedThemePath);
+            }
+            mergedThemeConfig = {};
+            grunt.file.write(mergedThemePath + "/theme.json", JSON.stringify(mergedThemeConfig));
+            _mergeThemes();
+            grunt.log.debug("theme.json wrote after inheritance: " + JSON.stringify(mergedThemeConfig));
+            grunt.file.write(mergedThemePath + "/theme.json", JSON.stringify(mergedThemeConfig));
+            grunt.config.set('config.theme', mergedThemeName);
+            grunt.log.ok("Switched to theme " + mergedThemeName + " before update tiapp and merging i18n files");
+        } else {
+            grunt.log.ok("No inheritance settings found.");            
+        }
     });
     
 };

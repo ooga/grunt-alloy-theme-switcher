@@ -15,8 +15,8 @@ module.exports = function(grunt) {
     i18n = require('ti-i18n'),  
     chalk = require("chalk");
 
-    grunt.registerTask('merge_i18n', 'If i18n files are found, merge into app i18n xmls', function(theme) {
-        var i18nThemePath = grunt.option('themes_folder') + theme + '/i18n/';
+    grunt.registerTask('merge_i18n', 'If i18n files are found, merge into app i18n xmls', function() {
+        var i18nThemePath = grunt.option('themes_folder') + grunt.config.get('config.theme') + '/i18n/';
         var i18nAppPath = './i18n/';
         if (fs.existsSync(i18nThemePath) && fs.existsSync(i18nAppPath)) {
             // get app xml languages folders and keep only languages existing in theme
