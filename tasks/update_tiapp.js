@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                 return true;
             }
         } else {
-            console.log(chalk.yellow("No android configuration found for " + grunt.config.get('config.theme') + "!"));
+            console.log(chalk.yellow("No android configuration found for " + grunt.option("theme") + "!"));
             return true;
         }
     };

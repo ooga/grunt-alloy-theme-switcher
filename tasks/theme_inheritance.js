@@ -59,7 +59,7 @@ module.exports = function(grunt) {
     grunt.registerTask('extendTheme', 'Check if a theme inherits from another and if so generate the resulting theme', function() {
         existingThemes = grunt.config.get('prompt.choose_theme.options.questions')[0].choices;
         themesTree = [];
-        themesTree.push(grunt.config.get('config.theme'));
+        themesTree.push(grunt.option("theme"));
         var themeConfig = utils.getThemeConfig(grunt);
         _constructThemesTree(themeConfig);
         if (themesTree.length > 1){
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
             _mergeThemes();
             grunt.log.debug("theme.json wrote after inheritance: " + JSON.stringify(mergedThemeConfig));
             grunt.file.write(mergedThemePath + "/theme.json", JSON.stringify(mergedThemeConfig));
-            grunt.config.set('config.theme', mergedThemeName);
+            grunt.option("theme", mergedThemeName);
             grunt.log.ok("Switched to theme " + mergedThemeName + " before update tiapp and merging i18n files");
         } else {
             grunt.log.ok("No inheritance settings found.");            

@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     grunt.registerTask('select_theme', 'Update the app/config.json with theme name provided as argument', function() {
         //select theme in config.json
         var alloyCfg = utils.parseJSON("./app/config.json");
-        alloyCfg.global.theme = grunt.config.get('config.theme');
+        alloyCfg.global.theme = grunt.option("theme");
         console.log(chalk.green('\nUpdated Theme to ' + alloyCfg.global.theme));
         fs.writeFileSync("./app/config.json", JSON.stringify(alloyCfg, null,4));
     });
