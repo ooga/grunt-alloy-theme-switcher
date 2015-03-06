@@ -108,7 +108,7 @@ Default value: none
 
 You can provide a theme to build as follows:
 ```shell
-grunt alloy_theme_switcher:mySuperTheme
+grunt alloy_theme_switcher --theme=mySuperTheme
 ```
 
 ### Usage Examples
