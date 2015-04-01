@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     utils = require("../lib/utils.js"),
     existingThemes = [],
     themesTree = [],
-    foldersToCopy = [{folder:'/styles', ext:'tss'}, {folder:'/views', ext:'xml'}, {folder:'/i18n', ext:'xml'}],
+    foldersToCopy = [{folder:'/assets', ext:'*'}, {folder:'/styles', ext:'tss'}, {folder:'/i18n', ext:'xml'}],
     mergedThemeName = 'mergedTheme',
     mergedThemeConfig = {},
     mergedThemePath;
@@ -44,6 +44,13 @@ module.exports = function(grunt) {
                     });
                 }
             });
+            // copy widgets folder
+            var widgetsFolder = '/widgets';
+            if (grunt.file.exists(themePathToMerge + widgetsFolder) && grunt.file.isDir(themePathToMerge + widgetsFolder)) {
+                grunt.file.expand({filter:'isFile'}, themePathToMerge + widgetsFolder + '/**').forEach(function(filepath){
+                    grunt.file.copy(filepath, filepath.replace(themeToMerge, mergedThemeName));
+                });
+            }
             // merge theme json
             var configToMerge = utils.getThemeConfig(grunt, themeToMerge);
             if (configToMerge) {
