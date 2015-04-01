@@ -1,5 +1,7 @@
 # grunt-alloy-theme-switcher
 
+[![NPM](https://nodei.co/npm/grunt-alloy-theme-switcher.png)](https://npmjs.org/package/grunt-alloy-theme-switcher)
+
 > A grunt plugin to make easier theme switching AND make possible themes inheritance in a titanium's alloy project. 
 
 ## Reasons
