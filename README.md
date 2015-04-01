@@ -136,6 +136,7 @@ grunt
 * [Jason Kneen](https://github.com/jasonkneen) for tich and tith which inspired the tiapp.xml settings part and the theme select task
 
 ## Release History
+- 0.2.2 remove views copy and add widgets+assets
 - 0.2.1 switch to grunt option so theme can be passed through cli
 - 0.2.0 Added the inheritance of themes.
 - 0.1.0 initial version. Tiapp.xml settings plus i18n files merge.

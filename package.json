@@ -1,7 +1,7 @@
 {
   "name": "grunt-alloy-theme-switcher",
   "description": "A grunt plugin to make easier theme switching AND make possible themes inheritance in a titanium's alloy project.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/CanalTP/grunt-alloy-theme-switcher",
   "author": {
     "name": "Vincent Degroote",
