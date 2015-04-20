@@ -72,13 +72,17 @@ module.exports = function(grunt) {
             var tiapp = require('tiapp.xml').load('./tiapp.xml');
             for (var setting in themeConfig.settings) {
                 tiapp[setting] = themeConfig.settings[setting];
-                console.log('Changing ' + chalk.cyan(setting) + ' to ' + chalk.yellow(themeConfig.settings[setting]));
+                grunt.log.ok('Changing setting ' + chalk.cyan(setting) + ' to ' + chalk.yellow(themeConfig.settings[setting]));
             }
-            if (_updateManifest(tiapp, themeConfig)) {
+            for (var property in themeConfig.properties) {
+                tiapp.setProperty(themeConfig.properties[property].name, themeConfig.properties[property].value, themeConfig.properties[property].type);
+                grunt.log.ok('Set property ' + chalk.cyan(themeConfig.properties[property].name) + ' with value ' + chalk.yellow(themeConfig.properties[property].value));
+            }
+            if (_updateManifest(tiapp, themeConfig) || themeConfig.settings.length > 0 || themeConfig.properties.length > 0) {
                 tiapp.write();
-                console.log(chalk.green('\nTiApp.xml updated\n'));
+                grunt.log.ok(chalk.green('\nTiApp.xml updated\n'));
             } else {
-                grunt.fail.fatal(chalk.red("TiApp.xml not updated."));
+                grunt.fail.warn("TiApp.xml not updated.");
             }
         }
     });

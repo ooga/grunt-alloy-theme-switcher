@@ -62,6 +62,12 @@ Here is a complete example of what you can put inside this file:
         "version": "0.0.1",
         "id": "com.mycompany.myapp"
     },
+    "properties": [
+        {
+            "name": "GA_ID",
+            "value": "UA-6710471-12"
+        }
+    ],
     "android":{
         "versionCode":"14",
         "MAPS_V2_API_KEY": "myincomprehensiblegmapstoken"
@@ -74,6 +80,8 @@ Here is a complete example of what you can put inside this file:
 Themes can inherit from one another, read [Themes inheritance](#themes-inheritance) part for more details.
 #### settings
 You can currently put any top level tiapp.xml node in the settings object, so *publisher*, *copyright*, *icon* etc
+#### properties
+An array of properties can be set, and for each item you must provide a name and optionnally the value and type (cf http://docs.appcelerator.com/titanium/3.0/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-app_properties)
 #### android (optional)
 This part is used to generate the android's manifest. You *MUST* have a manifest inside you app's for this feature to work. If no manifest is found, it will raise an error. Both versionCode and MAPS_V2_API_KEY are optionnals.
 
