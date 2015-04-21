@@ -69,6 +69,12 @@ Here is a complete example of what you can put inside this file:
             "type": "String"
         }
     ],
+    "modulesToRemove":[
+        {
+            "id": "yy.logcatcher",
+            "platform": ["android", "iphone"]
+        }
+    ]
     "android":{
         "versionCode":"14",
         "MAPS_V2_API_KEY": "myincomprehensiblegmapstoken"
@@ -86,6 +92,8 @@ You can currently put any top level tiapp.xml node in the settings object, so *p
 An array of properties can be set, and for each item you must provide a name and optionnally the value and type (cf http://docs.appcelerator.com/titanium/3.0/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-app_properties)
 #### android
 This part is used to generate the android's manifest. You *MUST* have a manifest inside you app's for this feature to work. If no manifest is found, it will raise an error. Both versionCode and MAPS_V2_API_KEY are optionnals.
+#### modulesToRemove
+Modules can be removed from tiapp.xml. For instance you can remove a crash or error reporter. A property called modulesRemoved will be added to tell js which modules were actually removed. This property is a JSON representation of an array containing removed modules ids.
 
 ## Themes inheritance
 ### what's the purpose?
@@ -111,8 +119,6 @@ Type: `String`
 Default value: `./app/themes/`
 
 Location of the alloy's themes folder (with a trailing slash).
-
-### Arguments
 
 #### theme
 Type: `String`
