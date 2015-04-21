@@ -14,8 +14,8 @@ This grunt plugin was made to fix 3 problems when using [alloy's themes system](
 ## what this plugin does
 
 1. if the chosen theme inherits from another, it creates a tmp theme to merge files from the different themes (furher reading below)
-2. update tiapp.xml based on theme.json configuration
-3. merge theme's strings.xml into app
+2. update tiapp.xml based on theme.json configuration (add properties, update settings like app id, remove specified modules...)
+3. merge theme's strings.xml into app/i18n folder
 
 ## Warning
 When running this plugin, tiapp.xml and i18n files will be overwritten so *be sure to keep a backup* of those files before running it.
