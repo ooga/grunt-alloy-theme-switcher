@@ -2,7 +2,7 @@
  * grunt-alloy-theme-switcher
  * https://github.com/CanalTP/grunt-alloy-theme-switcher
  *
- * Copyright (c) 2015 Vincent Degroote
+ * Copyright (c) 2015 Canal TP
  * Licensed under the AGPL license.
  */
 
@@ -39,6 +39,7 @@ module.exports = function(grunt) {
         if (theme && fs.existsSync(grunt.option('themes_folder') + theme)) {
             grunt.task.run('extendTheme');
             grunt.task.run('update_tiapp');
+            grunt.task.run('remove_modules');
             grunt.task.run('merge_i18n');
         } else {
             if (fs.existsSync(grunt.option('themes_folder')) === false || fs.statSync(grunt.option('themes_folder')).isDirectory() === false) {

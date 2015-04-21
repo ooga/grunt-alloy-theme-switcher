@@ -2,7 +2,7 @@
  * grunt-alloy-theme-switcher
  * https://github.com/CanalTP/grunt-alloy-theme-switcher
  *
- * Copyright (c) 2015 Vincent Degroote
+ * Copyright (c) 2015 Canal TP
  * Licensed under the AGPL license.
  */
 

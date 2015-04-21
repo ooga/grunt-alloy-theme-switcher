@@ -6,7 +6,7 @@
 
 ## Reasons
 
-This grunt plugin was made to fix 2 problems when using [alloy's themes system](http://docs.appcelerator.com/titanium/3.0/#!/guide/Alloy_Styles_and_Themes-section-35621526_AlloyStylesandThemes-Themes):
+This grunt plugin was made to fix 3 problems when using [alloy's themes system](http://docs.appcelerator.com/titanium/3.0/#!/guide/Alloy_Styles_and_Themes-section-35621526_AlloyStylesandThemes-Themes):
 - tiapp.xml files could not be themed and we had to manually edit tiapps when building themes (including android manifest and google maps api key which is lost inside the manifest)
 - i18n/*/strings.xml could not be redefined by themes
 - if 2 themes (or more) had files in common, we were obliged to manually copy those files
@@ -64,8 +64,9 @@ Here is a complete example of what you can put inside this file:
     },
     "properties": [
         {
-            "name": "GA_ID",
-            "value": "UA-6710471-12"
+            "name": "myproperty",
+            "value": "a super value",
+            "type": "String"
         }
     ],
     "android":{
@@ -75,14 +76,15 @@ Here is a complete example of what you can put inside this file:
 }
 ```
 
-### Details
+### Parameters
+
 #### baseTheme
 Themes can inherit from one another, read [Themes inheritance](#themes-inheritance) part for more details.
 #### settings
 You can currently put any top level tiapp.xml node in the settings object, so *publisher*, *copyright*, *icon* etc
 #### properties
 An array of properties can be set, and for each item you must provide a name and optionnally the value and type (cf http://docs.appcelerator.com/titanium/3.0/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-app_properties)
-#### android (optional)
+#### android
 This part is used to generate the android's manifest. You *MUST* have a manifest inside you app's for this feature to work. If no manifest is found, it will raise an error. Both versionCode and MAPS_V2_API_KEY are optionnals.
 
 ## Themes inheritance
@@ -144,9 +146,3 @@ grunt
 * [Tony Luka Savage](http://github.com/tonylukasavage) for the tiapp.xml
 * [Fokke Zandbergen](http://github.com/fokkeZB) for the ti-i18n
 * [Jason Kneen](https://github.com/jasonkneen) for tich and tith which inspired the tiapp.xml settings part and the theme select task
-
-## Release History
-- 0.2.2 remove views copy and add widgets+assets
-- 0.2.1 switch to grunt option so theme can be passed through cli
-- 0.2.0 Added the inheritance of themes.
-- 0.1.0 initial version. Tiapp.xml settings plus i18n files merge.
