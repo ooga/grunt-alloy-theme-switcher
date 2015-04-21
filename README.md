@@ -143,7 +143,7 @@ grunt
 ```
 
 ### TODO
-- add titanium build
+- ~~add titanium build~~ can be done using https://github.com/tonylukasavage/grunt-titanium
 - find a way to leave untouched tiapp.xml, app/config.json and i18n folder
 - find a way to do the merge without creating a new folder
 
