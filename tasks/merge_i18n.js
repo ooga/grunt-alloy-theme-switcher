@@ -18,6 +18,9 @@ module.exports = function(grunt) {
     grunt.registerTask('merge_i18n', 'If i18n files are found, merge into app i18n xmls', function() {
         var i18nThemePath = grunt.option('themes_folder') + grunt.option("theme") + '/i18n/';
         var i18nAppPath = './i18n/';
+        if (!fs.existsSync(i18nAppPath)) {
+            i18nAppPath = './app/i18n/';
+        }
         if (fs.existsSync(i18nThemePath) && fs.existsSync(i18nAppPath)) {
             // get app xml languages folders and keep only languages existing in theme
             var languagesDirectories = fs.readdirSync(i18nAppPath).filter(function(file) {
