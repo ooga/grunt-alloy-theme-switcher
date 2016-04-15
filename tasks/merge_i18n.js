@@ -19,10 +19,11 @@ module.exports = function(grunt) {
     grunt.registerTask('merge_i18n', 'If i18n files are found, merge into app i18n xmls', function() {
         var i18nThemePath = grunt.option('themes_folder') + grunt.option("theme") + '/i18n/';
         var i18nAppPath = './i18n/';
+        var i18nAppPathNewAlloy = './app/i18n/';
         var isNewAlloy = false;
-        if (!fs.existsSync(i18nAppPath)) {
-            i18nAppPath = './app/i18n/';
+        if (!fs.existsSync(i18nAppPath) && fs.existsSync(i18nAppPathNewAlloy)) {
             isNewAlloy = true;
+            fs_extra.copySync(i18nAppPathNewAlloy, i18nAppPath);
         }
         if (fs.existsSync(i18nThemePath) && fs.existsSync(i18nAppPath)) {
             // get app xml languages folders and keep only languages existing in theme
@@ -38,13 +39,13 @@ module.exports = function(grunt) {
                             source: filePath,
                             language: languageDir
                         });
-                        if (isNewAlloy) {
-                            fs_extra.copySync('./i18n/' + languageDir + '/' + file, i18nAppPath + languageDir + '/' + file, {clobber: true});
-                            fs_extra.removeSync('./i18n');
-                        }
                     }
                 });
             });
+            if (isNewAlloy) {
+                fs_extra.copySync(i18nAppPath, i18nAppPathNewAlloy, {clobber: true});
+                fs_extra.removeSync('./i18n');
+            }
         } else {
             console.log(chalk.cyan.underline('no i18n files found in theme (or in app).\n'));
         }
