@@ -10,6 +10,7 @@
 
 module.exports = function(grunt) {
     var fs = require('fs'),
+    fs_extra = require('fs-extra'),
     path = require('path'),
     _ = require('underscore'),
     i18n = require('ti-i18n'),  
@@ -18,8 +19,10 @@ module.exports = function(grunt) {
     grunt.registerTask('merge_i18n', 'If i18n files are found, merge into app i18n xmls', function() {
         var i18nThemePath = grunt.option('themes_folder') + grunt.option("theme") + '/i18n/';
         var i18nAppPath = './i18n/';
+        var isNewAlloy = false;
         if (!fs.existsSync(i18nAppPath)) {
             i18nAppPath = './app/i18n/';
+            isNewAlloy = true;
         }
         if (fs.existsSync(i18nThemePath) && fs.existsSync(i18nAppPath)) {
             // get app xml languages folders and keep only languages existing in theme
@@ -35,6 +38,10 @@ module.exports = function(grunt) {
                             source: filePath,
                             language: languageDir
                         });
+                        if (isNewAlloy) {
+                            fs_extra.copySync('./i18n/' + languageDir + '/' + file, i18nAppPath + languageDir + '/' + file, {clobber: true});
+                            fs_extra.removeSync('./i18n');
+                        }
                     }
                 });
             });
