@@ -41,6 +41,7 @@ module.exports = function(grunt) {
             grunt.task.run('update_tiapp');
             grunt.task.run('remove_modules');
             grunt.task.run('merge_i18n');
+            grunt.task.run('copy_fonts');
         } else {
             if (fs.existsSync(grunt.option('themes_folder')) === false || fs.statSync(grunt.option('themes_folder')).isDirectory() === false) {
                 grunt.fail.fatal("No themes folder found in " + grunt.option('themes_folder'));
